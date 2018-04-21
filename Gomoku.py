@@ -1,6 +1,18 @@
 # Gomoku Main Game
 from __future__ import print_function
 import numpy as np
+import argparse
+
+# parse the input parameters
+parser = argparse.ArgumentParser()
+
+parser.add_argument('--width',type = int)
+parser.add_argument('--height',type = int)
+
+args = parser.parse_args()
+
+WIDTH = args.width
+HEIGHT = args.height
 
 class Board(object):
     """
@@ -233,8 +245,12 @@ class player(object):
 
 def run():
     n = 5
-    width, height = 8, 8
-    model_file = 'best_policy_8_8_5.model'
+    width = WIDTH
+    height = HEIGHT
+    if not width:
+        width = 9
+    if not height:
+        height = 9
     try:
         board = Board(width=width, height=height, n_in_row=n)
         game = Game(board)
@@ -247,3 +263,4 @@ def run():
 
 if __name__ == '__main__':
     run()
+
